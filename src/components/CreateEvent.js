@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { ethers } from "ethers";
 import { storageABI } from "../contractABI/storageABI";
 
-const creatorAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
+const storageAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
 
 function CreateEvent({ provider }) {
   const [form, setForm] = useState({ name: "", date: "", price: "", count: "" });
 
   const handleCreate = async () => {
     const signer = await provider.getSigner();
-    const contract = new ethers.Contract(creatorAddress, creatorABI, signer);
+    const contract = new ethers.Contract(storageAddress, storageABI, signer);
     const timestamp = Math.floor(new Date(form.date).getTime() / 1000);
 
     await contract.createEvent(form.name, timestamp, form.price, form.count);
